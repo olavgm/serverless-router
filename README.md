@@ -11,3 +11,26 @@ npm install @olavgm/serverless-router
 ```
 
 ## Usage
+
+```
+const Router = require('@olavgm/serverless-router')
+
+Router.register('GET', '/hello/:name', async (req, res, params) => {
+  console.info(`Sending response to ${req.method} ${req.path}`)
+  res.status(200).send(`Hello, ${params.name}, ${req.method} ${req.path}`)
+})
+
+Router.register('POST', '/hello/:name', async (req, res, params) => {
+  console.info(`Sending response to ${req.method} ${req.path}`)
+  res.status(200).send(`Hello, ${params.name}, ${req.method} ${req.path} ${req.body.age}`)
+})
+
+Router.register('*', '/goodbye/:name', async (req, res, params) => {
+  console.info(`Sending response to ${req.method} ${req.path}`)
+  res.status(200).send(`Goodbye, ${params.name}`)
+})
+
+exports.testgcfapi = (req, res) => {
+  Router.route(req, res)
+}
+```
