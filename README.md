@@ -34,3 +34,13 @@ exports.testgcfapi = (req, res) => {
   Router.route(req, res)
 }
 ```
+
+In this example, three routes are registered, `GET /hello/:name`, `POST /hello/:name` and `/goodbye/:name`.
+
+The `exports.testgcfapi` is the method that will be called by _Google Cloud Functions_. For deploying this function this method has to be specified:
+
+```
+gcloud functions deploy testgcfapi --runtime nodejs8 --trigger-http
+```
+
+In the `exports.testgcfapi` method the routing of the request is executed to process the request through the registered routes.
