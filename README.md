@@ -12,7 +12,7 @@ npm install @olavgm/serverless-router
 
 ## Usage
 
-```
+```node
 const Router = require('@olavgm/serverless-router')
 
 Router.register('GET', '/hello/:name', async (req, res, params) => {
