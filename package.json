@@ -1,7 +1,7 @@
 {
   "name": "serverless-router",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "Router for serverless functions",
   "main": "router.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/olavgm/serverless-router.git"
   },
-  "author": "",
+  "author": "Olav Gausaker",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/olavgm/serverless-router/issues"
