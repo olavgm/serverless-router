@@ -1,0 +1,22 @@
+{
+  "name": "serverless-router",
+  "version": "1.0.0",
+  "description": "",
+  "main": "router.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olavgm/serverless-router.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/olavgm/serverless-router/issues"
+  },
+  "homepage": "https://github.com/olavgm/serverless-router#readme",
+  "dependencies": {
+    "route-parser": "0.0.5"
+  }
+}
