@@ -9,7 +9,7 @@ exports.register = (method, path, callback) => {
     }
   }
 
-  console.debug(`Registering ${method} ${path}`)
+  console.info(`Registering ${method} ${path}`)
 
   exports.templates.push({
     method: method,
@@ -26,7 +26,7 @@ exports.route = (req, res) => {
     return
   }
 
-  console.debug(`Found match for ${req.method} ${req.path} -> ${template.method} ${template.path}`)
+  console.info(`Found match for ${req.method} ${req.path} -> ${template.method} ${template.path}`)
   template.callback(req, res, template.match)
 }
 
