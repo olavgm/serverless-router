@@ -18,6 +18,30 @@ exports.register = (method, path, callback) => {
   })
 }
 
+exports.all = (path, callback) => {
+  exports.register('*', path, callback)
+}
+
+exports.get = (path, callback) => {
+  exports.register('GET', path, callback)
+}
+
+exports.post = (path, callback) => {
+  exports.register('POST', path, callback)
+}
+
+exports.put = (path, callback) => {
+  exports.register('PUT', path, callback)
+}
+
+exports.delete = (path, callback) => {
+  exports.register('DELETE', path, callback)
+}
+
+exports.patch = (path, callback) => {
+  exports.register('PATCH', path, callback)
+}
+
 exports.route = (req, res) => {
   const template = findTemplate(req)
 
