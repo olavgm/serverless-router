@@ -15,19 +15,45 @@ npm install @olavgm/serverless-router
 ```node
 const Router = require('@olavgm/serverless-router')
 
-Router.register('GET', '/hello/:name', async (req, res, params) => {
+Router.get('/hello/:name', async (req, res) => {
   console.info(`Sending response to ${req.method} ${req.path}`)
-  res.status(200).send(`Hello, ${params.name}, ${req.method} ${req.path}`)
+  res.status(200).send(`Hello, ${req.params.name}, ${req.method} ${req.path}`)
 })
 
-Router.register('POST', '/hello/:name', async (req, res, params) => {
+Router.post('/hello/:name', async (req, res) => {
   console.info(`Sending response to ${req.method} ${req.path}`)
-  res.status(200).send(`Hello, ${params.name}, ${req.method} ${req.path} ${req.body.age}`)
+  res.status(200).send(`Hello, ${req.params.name}, ${req.method} ${req.path} ${req.body.age}`)
 })
 
-Router.register('*', '/goodbye/:name', async (req, res, params) => {
+// Registers for all HTTP verbs
+Router.all('/goodbye/:name', async (req, res) => {
   console.info(`Sending response to ${req.method} ${req.path}`)
-  res.status(200).send(`Goodbye, ${params.name}`)
+  res.status(200).send(`Goodbye, ${req.params.name}`)
+})
+
+exports.testgcfapi = (req, res) => {
+  Router.route(req, res)
+}
+```
+
+It could also be done this way, using the `register` method and passing the verb as the first parameter.
+
+```node
+const Router = require('@olavgm/serverless-router')
+
+Router.register('GET', '/hello/:name', async (req, res) => {
+  console.info(`Sending response to ${req.method} ${req.path}`)
+  res.status(200).send(`Hello, ${req.params.name}, ${req.method} ${req.path}`)
+})
+
+Router.register('POST', '/hello/:name', async (req, res) => {
+  console.info(`Sending response to ${req.method} ${req.path}`)
+  res.status(200).send(`Hello, ${req.params.name}, ${req.method} ${req.path} ${req.body.age}`)
+})
+
+Router.register('*', '/goodbye/:name', async (req, res) => {
+  console.info(`Sending response to ${req.method} ${req.path}`)
+  res.status(200).send(`Goodbye, ${req.params.name}`)
 })
 
 exports.testgcfapi = (req, res) => {
