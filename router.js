@@ -27,7 +27,9 @@ exports.route = (req, res) => {
   }
 
   console.info(`Found match for ${req.method} ${req.path} -> ${template.method} ${template.path}`)
-  template.callback(req, res, template.match)
+
+  req.params = template.match
+  template.callback(req, res)
 }
 
 function findTemplate (req) {
