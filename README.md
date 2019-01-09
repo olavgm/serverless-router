@@ -15,18 +15,20 @@ npm install @olavgm/serverless-router
 ```node
 const Router = require('@olavgm/serverless-router')
 
-Router.get('/hello/:name', async (req, res) => {
+let options = {}
+
+Router.get('/hello/:name', options, async (req, res, authInfo) => {
   console.info(`Sending response to ${req.method} ${req.path}`)
   res.status(200).send(`Hello, ${req.params.name}, ${req.method} ${req.path}`)
 })
 
-Router.post('/hello/:name', async (req, res) => {
+Router.post('/hello/:name', options, async (req, res, authInfo) => {
   console.info(`Sending response to ${req.method} ${req.path}`)
   res.status(200).send(`Hello, ${req.params.name}, ${req.method} ${req.path} ${req.body.age}`)
 })
 
 // Registers for all HTTP verbs
-Router.all('/goodbye/:name', async (req, res) => {
+Router.all('/goodbye/:name', options, async (req, res, authInfo) => {
   console.info(`Sending response to ${req.method} ${req.path}`)
   res.status(200).send(`Goodbye, ${req.params.name}`)
 })
@@ -41,17 +43,17 @@ It could also be done this way, using the `register` method and passing the verb
 ```node
 const Router = require('@olavgm/serverless-router')
 
-Router.register('GET', '/hello/:name', async (req, res) => {
+Router.register('GET', '/hello/:name', options, async (req, res) => {
   console.info(`Sending response to ${req.method} ${req.path}`)
   res.status(200).send(`Hello, ${req.params.name}, ${req.method} ${req.path}`)
 })
 
-Router.register('POST', '/hello/:name', async (req, res) => {
+Router.register('POST', '/hello/:name', options, async (req, res, authInfo) => {
   console.info(`Sending response to ${req.method} ${req.path}`)
   res.status(200).send(`Hello, ${req.params.name}, ${req.method} ${req.path} ${req.body.age}`)
 })
 
-Router.register('*', '/goodbye/:name', async (req, res) => {
+Router.register('*', '/goodbye/:name', options, async (req, res, authInfo) => {
   console.info(`Sending response to ${req.method} ${req.path}`)
   res.status(200).send(`Goodbye, ${req.params.name}`)
 })
@@ -62,6 +64,8 @@ exports.testgcfapi = (req, res) => {
 ```
 
 In this example, three routes are registered, `GET /hello/:name`, `POST /hello/:name` and `/goodbye/:name`.
+
+`options` is an object that can contain a property `authorization`, which is a function (`req => ()`) that will check for authorization. The function receives the request object as the only parameter. It should return `false` is the authorization is not valid, and whatever information if the authorization is valid. For example, in an JWT bearer token validation, the function can return the decoded JWT.
 
 The `exports.testgcfapi` is the method that will be called by _Google Cloud Functions_. For deploying this function this method has to be specified:
 
