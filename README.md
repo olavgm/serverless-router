@@ -74,3 +74,15 @@ gcloud functions deploy testgcfapi --runtime nodejs8 --trigger-http
 ```
 
 In the `exports.testgcfapi` method the routing of the request is executed to process the request through the registered routes.
+
+### Static routes
+
+If you want to include static files use this, where the paramameter is the path to the folder where the static files are.
+
+```
+Router.static('./static')
+```
+
+The router will try to match the registered URLs. If none of the match, it will try to find the file in the static folder, including route. If so, it will return the file.
+
+In this example, if you have the file `./static/docs/about.html`, the route `/docs/about.html` will return the file.
