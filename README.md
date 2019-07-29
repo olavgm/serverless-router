@@ -80,7 +80,7 @@ In the `exports.testgcfapi` method the routing of the request is executed to pro
 If you want to include static files use this, where the paramameter is the path to the folder where the static files are.
 
 ```
-Router.static('./static')
+Router.static(`${__dirname}/static`)
 ```
 
 The router will try to match the registered URLs. If none of the match, it will try to find the file in the static folder, including route. If so, it will return the file.
