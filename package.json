@@ -1,6 +1,6 @@
 {
   "name": "@olavgm/serverless-router",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Router for serverless functions",
   "main": "router.js",
   "scripts": {
