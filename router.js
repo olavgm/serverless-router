@@ -1,6 +1,8 @@
 const Route = require('route-parser')
+const fs = require('fs')
 
 exports.templates = []
+exports.static = null
 
 exports.register = (method, path, options, callback) => {
   for (const template of exports.templates) {
@@ -43,10 +45,29 @@ exports.patch = (path, options, callback) => {
   exports.register('PATCH', path, options, callback)
 }
 
+exports.static = (staticPath) => {
+  this.static = staticPath
+}
+
 exports.route = (req, res) => {
   const template = findTemplate(req)
 
   if (!template) {
+    if (this.static && req.method === 'GET') {
+      try {
+        const filePath = `${this.static}${req.path}`
+
+        if (fs.existsSync(filePath)) {
+          console.info(`Found match for ${req.path} in static.`)
+
+          res.sendFile(filePath)
+          return
+        }
+      } catch (err) {
+        console.error(err)
+      }
+    }
+
     res.status(404).send(`Not found.`)
     return
   }
