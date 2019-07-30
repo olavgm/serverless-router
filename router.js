@@ -13,12 +13,7 @@ exports.register = (method, path, options, callback) => {
 
   console.info(`Registering ${method} ${path}`)
 
-  exports.templates.push({
-    method: method,
-    path: path,
-    options: options,
-    callback: callback
-  })
+  exports.templates.push({ method, path, options, callback })
 }
 
 exports.all = (path, options, callback) => {
@@ -72,10 +67,9 @@ exports.route = (req, res) => {
     return
   }
 
-  let authorization = ((template || {}).options || {}).authorization
-
   console.info(`Found match for ${req.method} ${req.path} -> ${template.method} ${template.path}`)
 
+  let authorization = ((template || {}).options || {}).authorization
   let authorizationResult
 
   if (authorization !== undefined) {
