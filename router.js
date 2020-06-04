@@ -11,7 +11,7 @@ exports.register = (method, path, options, callback) => {
     }
   }
 
-  console.info(`Registering ${method} ${path}`)
+  console.debug(`Registering ${method} ${path}`)
 
   exports.templates.push({ method, path, options, callback })
 }
@@ -53,7 +53,7 @@ exports.route = (req, res) => {
         const filePath = `${this.static}${req.path}`
 
         if (fs.existsSync(filePath)) {
-          console.info(`Found match for ${req.path} in static.`)
+          console.debug(`Found match for ${req.path} in static.`)
 
           res.sendFile(filePath)
           return
@@ -67,7 +67,7 @@ exports.route = (req, res) => {
     return
   }
 
-  console.info(`Found match for ${req.method} ${req.path} -> ${template.method} ${template.path}`)
+  console.debug(`Found match for ${req.method} ${req.path} -> ${template.method} ${template.path}`)
 
   let authorization = ((template || {}).options || {}).authorization
   let authorizationResult
